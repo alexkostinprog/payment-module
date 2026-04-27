@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -7,27 +7,30 @@ function App() {
 
   const intervalRef = useRef<number | null>(null); 
 
+  useEffect(() => {
+    if (isRunning) {
+      intervalRef.current = setInterval(() => {
+        setCounter(prev => prev + 10);
+      }, 10);
+    }
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isRunning]);
+
   const handleStop = () => {
     setIsRunning(false);
     setCounter(0);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
   };
 
   const handlePause = () => {
     setIsRunning(prev => !prev);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    } else {
-      intervalRef.current = setInterval(() => {
-      setCounter(prevCounter => prevCounter + 10);
-    }, 10);
-    }
-  }
+  };
 
+  const hours = Math.floor((counter / 1000) / 3600);
+  const minutes = Math.floor((counter / 1000) / 60) % 60;
+  const seconds = Math.floor((counter / 1000) % 60);
+  const milliseconds = Math.floor(counter % 100);
 
   return (
     <>
@@ -35,13 +38,13 @@ function App() {
         <div>
           <h1>Get started</h1>
           <p className="counterText">
-            <span>{ Math.floor((counter / 1000) / 3600).toString().padStart(2, "0") } </span>
+            <span>{ hours.toString().padStart(2, "0") } </span>
             <span> : </span> 
-            <span>{ Math.floor((counter / 1000) / 60).toString().padStart(2, "0") } </span>
+            <span>{ minutes.toString().padStart(2, "0") } </span>
             <span> : </span> 
-            <span>{ Math.floor((counter / 1000) % 60).toString().padStart(2, "0") }</span>
+            <span>{ seconds.toString().padStart(2, "0") }</span>
             <span>.</span>
-            <span>{ Math.floor(counter % 100).toString().padStart(2, "0") }</span>
+            <span>{ milliseconds.toString().padStart(2, "0") }</span>
           </p>
         </div>
         <button
