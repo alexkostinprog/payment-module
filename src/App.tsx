@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import Todos from './components/Todos/Todos';
 
 function App() {
   const [counter, setCounter] = useState(0)
@@ -64,6 +65,8 @@ function App() {
         </button>
 
       </section>
+
+      <Todos />
     </>
   )
 }

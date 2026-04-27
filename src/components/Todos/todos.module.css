@@ -1,0 +1,10 @@
+.todos {
+  font:
+    600 24px/26px Roboto,
+    serif;
+  color: #444;
+}
+
+ul {
+  list-style: none;
+}
