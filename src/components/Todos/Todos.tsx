@@ -33,9 +33,8 @@ export default function Todos() {
       <ul>
         {todosList.map((todo) => (
           <li key={todo.id}>
-            {' '}
             {todo.name}
-            <button onClick={() => deleteTask(todo.id)}>Delete</button>
+            <button className={style.deleteButton} onClick={() => deleteTask(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
