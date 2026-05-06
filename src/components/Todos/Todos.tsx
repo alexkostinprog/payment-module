@@ -18,7 +18,7 @@ export default function Todos() {
   };
 
   const deleteTask = (innerId: string): void => {
-    const newTaskList = [...todosList].filter((task) => task.id !== innerId);
+    const newTaskList = todosList.filter((task) => task.id !== innerId);
     setTodosList(newTaskList);
   };
 

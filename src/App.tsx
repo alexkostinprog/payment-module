@@ -51,7 +51,7 @@ function App() {
         <button
           type="button"
           className="counter"
-          onClick={() => { handlePause()}}
+          onClick={ handlePause }
         >
           {isRunning ? "Pause" : "Start"}
         </button>
@@ -59,7 +59,7 @@ function App() {
         <button
           type="button"
           className="counter"
-          onClick={() => { handleStop()}}
+          onClick={ handleStop }
         >
           Сброс
         </button>
